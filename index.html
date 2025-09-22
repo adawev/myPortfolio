@@ -46,6 +46,10 @@
         .nav-links {display:flex; gap:18px;}
         .nav-links a {color:var(--muted); text-decoration:none; font-weight:600; transition:color .2s;}
         .nav-links a:hover {color:var(--text)}
+        .nav-links {
+            display: flex;
+            gap: 60px;
+        }
 
         /* HERO */
         #hero {height:100vh; display:flex; align-items:center; justify-content:center;}
@@ -62,7 +66,18 @@
             font-weight:700; font-size:14px;
             box-shadow:0 4px 12px rgba(0,0,0,.4);
         }
-
+        .avatar {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid rgba(255,255,255,.08);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .avatar:hover {
+            box-shadow: 0 0 80px var(--accent); /* hover bo‘lganda shadow chiqadi */
+            transform: scale(1.02);
+        }
         .hero-title {font-size:clamp(30px,4.4vw,48px); font-weight:900; margin-bottom:14px;}
         .hero-sub {color:var(--muted); margin-bottom:22px;}
         .hero-cta {display:flex; gap:14px;}
@@ -79,18 +94,32 @@
         .projects-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;}
         .project {background:var(--card); border-radius:12px; padding:16px; border:1px solid rgba(255,255,255,.06); transition:.25s;}
         .project:hover {transform:translateY(-4px); box-shadow:0 18px 40px rgba(0,0,0,.65);}
+        .project > .imgwrap > img {width:100%; border-radius: 10px}
         .tags {display:flex; gap:8px; flex-wrap:wrap;}
         .tag {font-size:12px; color:var(--muted); background:rgba(255,255,255,.05); padding:4px 10px; border-radius:999px;}
         .actions {display:flex; gap:10px; margin-top:8px;}
         .action-btn {padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.08); color:var(--text); text-decoration:none; display:inline-flex; gap:6px; align-items:center;}
         .action-btn:hover {background:var(--text); color:var(--bg);}
+        .projects-grid .actions i {
+            color: var(--accent);
+            margin-right: 6px;
+        }
 
         /* SKILLS */
         .skills-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px;}
-        .skill {background:rgba(255,255,255,.03); border-radius:12px; padding:16px; display:flex; gap:14px; align-items:center; border:1px solid rgba(255,255,255,.05);}
+        .skill {background:var(--card); border-radius:12px; transition:.2s; padding:16px; display:flex; gap:14px; align-items:center; border:1px solid rgba(255,255,255,.05);}
         .skill:hover {transform:translateY(-4px); box-shadow:0 16px 32px rgba(0,0,0,.65);}
         .skill .icon {width:48px; height:48px; border-radius:12px; display:grid; place-items:center; background:rgba(255,255,255,.06);}
-
+        .skill .icon {
+            width: auto;
+            height: auto;
+            background: none;
+            font-size: 32px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         /* CONTACT */
         .contact-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin-top:30px;}
         .contact-item {display:flex; align-items:center; background:var(--card); padding:15px 20px; border-radius:12px; border:1px solid rgba(255,255,255,.06); transition:.2s;}
@@ -144,37 +173,36 @@
             <div class="projects-grid">
                 <!-- Project 1 -->
                 <article class="project">
-                    <div class="imgwrap"><img src="edudash.png" alt="EduDash"></div>
+                    <div class="imgwrap"><img src="images/edudash.png" alt="EduDash"></div>
                     <h4>EduDash</h4>
                     <p>Multi-language education dashboard (React + Redux).</p>
-                    <div class="tags"><span class="tag">React</span><span class="tag">Redux</span><span class="tag">Postgres</span></div>
+                    <div class="tags"><span class="tag">React</span><span class="tag">Java</span><span class="tag">Spring Boot</span></div>
                     <div class="actions">
                         <a class="action-btn" href="https://educationdashboard.dev" target="_blank"><i class="fa-solid fa-globe"></i> Demo</a>
-                        <a class="action-btn" href="https://github.com/adawev/edudash" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
                     </div>
                 </article>
 
                 <!-- Project 2 -->
                 <article class="project">
-                    <div class="imgwrap"><img src="portfolio.png" alt="Portfolio"></div>
-                    <h4>Personal Portfolio</h4>
-                    <p>Responsive personal portfolio website (HTML, CSS, JS).</p>
-                    <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+                    <div class="imgwrap"><img src="images/noutstore.png" alt="Portfolio"></div>
+                    <h4>Nout Store</h4>
+                    <p>A convenient app for a store selling laptops and gadgets</p>
+                    <div class="tags"><span class="tag">React</span><span class="tag">Java Spring</span><span class="tag">PostgreSQL</span></div>
                     <div class="actions">
-                        <a class="action-btn" href="https://adashev.uz" target="_blank"><i class="fa-solid fa-globe"></i> Demo</a>
-                        <a class="action-btn" href="https://github.com/adawev/portfolio" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+                        <a class="action-btn" href="https://noutstore.netlify.app" target="_blank"><i class="fa-solid fa-globe"></i> Demo</a>
+                        <a class="action-btn" href="https://github.com/adawev/NoutStoreFront" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
                     </div>
                 </article>
 
                 <!-- Project 3 -->
                 <article class="project">
-                    <div class="imgwrap"><img src="store.png" alt="Diyor Stroy"></div>
+                    <div class="imgwrap"><img src="images/diyorstroy.png" alt="Diyor Stroy"></div>
                     <h4>Diyor Stroy</h4>
                     <p>Construction store website with product catalog.</p>
-                    <div class="tags"><span class="tag">Bootstrap</span><span class="tag">JavaScript</span><span class="tag">Backend</span></div>
+                    <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
                     <div class="actions">
                         <a class="action-btn" href="https://diyorstroy.uz" target="_blank"><i class="fa-solid fa-globe"></i> Demo</a>
-                        <a class="action-btn" href="https://github.com/adawev/diyorstroy" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+                        <a class="action-btn" href="https://github.com/adawev/DiyorStroyWeb" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
                     </div>
                 </article>
             </div>
