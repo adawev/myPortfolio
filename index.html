@@ -130,6 +130,80 @@
         .contact-item a:hover {color:var(--text);}
 
         footer {padding:20px; text-align:center; color:var(--muted); border-top:1px solid rgba(255,255,255,.06);}
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 992px) {
+            .hero-inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 28px;
+            }
+            .hero-left {
+                order: 2;
+            }
+            .hero-right {
+                order: 1;
+                margin-bottom: 20px;
+            }
+            .hero-cta {
+                justify-content: center;
+            }
+            .nav-links {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                height: auto;
+                padding: 14px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+            .logo {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .projects-grid,
+            .skills-grid,
+            .contact-grid {
+                grid-template-columns: 1fr; /* bitta ustun */
+            }
+            .project, .skill, .contact-item {
+                text-align: center;
+                flex-direction: column;
+            }
+            .contact-item {
+                align-items: center;
+            }
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 24px;
+            }
+            .hero-sub {
+                font-size: 14px;
+            }
+            .btn {
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+            .section-title {
+                font-size: 18px;
+            }
+        }
+
     </style>
 </head>
 <body>
