@@ -1,307 +1,442 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <!--META TAGS-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--META TAGS END-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Diyorjon Adashev — Portfolio</title>
 
-    <!--CSS FILES-->
-    <link rel="stylesheet" href="./Bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="./aos-master/dist/aos.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <!--CSS FILES-->
-    <link rel="shortcut icon" type="image/x-icon" href="images/logo/logo111.png">
-    <title>Adashev Diyor</title>
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8BTYE62T9"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+    <style>
+        :root{
+            --bg:#0b0b0c;
+            --panel:#111216;
+            --muted:#bfc7cc;
+            --text:#eef2f3;
+            --accent:#7fe3d9; /* subtle accent, not Tiffany */
+            --card:#17181b;
+            --radius:12px;
+            --ease:cubic-bezier(.2,.9,.3,1);
+            font-family: Inter, "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
 
-        gtag('config', 'G-Y8BTYE62T9');
-    </script>
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0;
+            background:var(--bg);
+            color:var(--text);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            line-height:1.5;
+            scroll-behavior:smooth;
+        }
+
+        /* NAVBAR */
+        .nav {
+            position:fixed;
+            top:0;left:0;right:0;
+            height:64px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 28px;
+            background:rgba(8,8,9,0.6);
+            backdrop-filter:blur(8px);
+            z-index:120;
+            border-bottom:1px solid rgba(255,255,255,0.02);
+        }
+        .logo {display:flex; gap:12px; align-items:center}
+        .logo .mark{
+            width:44px; height:44px; border-radius:10px;
+            background:linear-gradient(180deg,#151515,#222);
+            display:grid; place-items:center; font-weight:700; color:var(--text);
+            box-shadow:0 6px 14px rgba(0,0,0,0.6);
+        }
+        .logo .name {font-weight:700; letter-spacing:0.2px; color:var(--text)}
+
+        .nav-links{display:flex; gap:18px; align-items:center}
+        .nav-links a{
+            color:var(--muted); text-decoration:none; font-weight:600; padding:8px 10px;
+            transition: color .22s var(--ease), transform .18s var(--ease);
+            border-radius:8px;
+        }
+        /* On hover only color change (no underline) */
+        .nav-links a:hover{ color:var(--text); transform: translateY(-2px) }
+
+        /* HERO - full screen */
+        #hero {
+            height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:48px;
+            padding:0 28px;
+            position:relative;
+        }
+        .hero-inner{
+            max-width:1200px;
+            width:100%;
+            display:flex;
+            gap:36px;
+            align-items:center;
+            justify-content:space-between;
+        }
+        .hero-left{
+            flex:1; min-width:320px;
+            transform:translateY(0);
+            opacity:1;
+        }
+        .hero-right{
+            width:320px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+        }
+
+        /* avatar circle */
+        .avatar{
+            width:280px; height:280px; border-radius:50%;
+            overflow:hidden; border:6px solid rgba(255,255,255,0.06);
+            background:linear-gradient(180deg,#0f0f10,#151516);
+            display:grid; place-items:center; transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+            box-shadow:0 20px 50px rgba(0,0,0,0.6);
+        }
+        .avatar img{ width:100%; height:100%; object-fit:cover; display:block }
+
+        .avatar:hover{ transform:scale(1.03); box-shadow:0 30px 70px rgba(0,0,0,0.75) }
+
+        .hero-title{
+            font-size: clamp(28px, 4.2vw, 44px);
+            font-weight:800; color:var(--text); margin-bottom:12px;
+            letter-spacing:-0.02em;
+            line-height:1.02;
+            transform:translateY(6px);
+        }
+        .hero-sub{
+            color:var(--muted); font-size:18px; max-width:680px;
+            margin-bottom:18px;
+        }
+        .hero-cta{ display:flex; gap:12px; align-items:center }
+        .btn{
+            padding:10px 16px; border-radius:10px; font-weight:700; cursor:pointer; text-decoration:none;
+            display:inline-flex; gap:8px; align-items:center; border:1px solid rgba(255,255,255,0.04);
+            transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
+            background:transparent; color:var(--text);
+        }
+        .btn.primary{ background:var(--text); color:var(--bg); box-shadow:0 8px 30px rgba(0,0,0,0.6) }
+        .btn.ghost{ border:1px solid rgba(255,255,255,0.06); color:var(--muted) }
+        .btn:hover{ transform:translateY(-4px) }
+
+        /* compact sections */
+        section { padding:56px 28px; }
+
+        .section-title{ font-size:20px; font-weight:800; color:var(--text); margin-bottom:14px }
+        .section-sub{ color:var(--muted); margin-bottom:18px; font-weight:500 }
+
+        /* PROJECTS */
+        .projects-grid{
+            display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap:18px;
+        }
+        .project{
+            background:var(--card); border-radius:12px; padding:14px; overflow:hidden;
+            display:flex; flex-direction:column; gap:10px; transition: transform .28s var(--ease), box-shadow .28s var(--ease);
+            border:1px solid rgba(255,255,255,0.02);
+        }
+        .project:hover{ transform:translateY(-8px); box-shadow:0 22px 50px rgba(0,0,0,0.6) }
+        .project .imgwrap{ height:150px; border-radius:8px; overflow:hidden; background:#0f0f10; display:grid; place-items:center }
+        .project img{ width:100%; height:100%; object-fit:cover; display:block }
+        .project h4{ margin:6px 0; font-size:18px; color:var(--text); font-weight:700 }
+        .project p{ color:var(--muted); font-size:13px; margin-bottom:6px }
+        .project .tags{ display:flex; gap:8px; flex-wrap:wrap }
+        .tag{ font-size:12px; color:var(--muted); background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:999px }
+
+        .project .actions{ margin-top:auto; display:flex; gap:10px; flex-wrap:wrap }
+        .action-btn{
+            display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius:999px; font-weight:700;
+            background:rgba(255,255,255,0.06); color:var(--text); text-decoration:none; border:1px solid rgba(255,255,255,0.02);
+            transition: background .18s var(--ease), transform .12s var(--ease);
+        }
+        .action-btn i{ font-size:14px; color:var(--muted) }
+        .action-btn:hover{ background:var(--text); color:var(--bg); transform:translateY(-3px) }
+        .action-btn:hover i{ color:var(--bg) }
+
+        /* SKILLS */
+        .skills-grid{
+            display:grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap:12px;
+        }
+        .skill{
+            background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border-radius:10px; padding:14px; display:flex; gap:12px; align-items:center;
+            transition: transform .28s var(--ease), box-shadow .28s var(--ease);
+            border:1px solid rgba(255,255,255,0.02);
+        }
+        .skill .icon{
+            width:44px; height:44px; border-radius:10px; display:grid; place-items:center; font-size:20px;
+            color:var(--text);
+            background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+        }
+        .skill strong{ font-size:14px; color:var(--text) }
+        .skill small{ display:block; color:var(--muted); font-size:12px }
+
+        /* skill pulse animation */
+        .skill:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.6) }
+        .skill.anim { animation: pop .9s ease; }
+        @keyframes pop { 0%{ transform:scale(.98) } 60%{ transform:scale(1.02) } 100%{ transform:scale(1) } }
+
+        /* CONTACT */
+        .contact-row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center }
+        .social{
+            display:inline-flex; gap:10px; align-items:center;
+        }
+        .social a{
+            width:46px; height:46px; border-radius:10px; display:grid; place-items:center; text-decoration:none;
+            background:rgba(255,255,255,0.03); color:var(--text); transition: transform .18s var(--ease), background .18s var(--ease);
+            border:1px solid rgba(255,255,255,0.02);
+        }
+        .social a:hover{ transform:translateY(-6px); background:rgba(255,255,255,0.12); color:var(--text) }
+
+        /* Footer */
+        footer{ padding:28px 20px; text-align:center; color:var(--muted); font-size:13px; border-top:1px solid rgba(255,255,255,0.02) }
+
+        /* Responsive tweaks */
+        @media (max-width:920px){
+            .hero-inner{ flex-direction:column-reverse; align-items:center; gap:24px }
+            .hero-right{ width:220px }
+            .avatar{ width:220px; height:220px }
+            nav { padding:0 16px }
+        }
+        @media (max-width:520px){
+            .nav { height:56px; padding:0 12px }
+            .logo .mark{ width:38px; height:38px }
+            .hero-title{ font-size:26px }
+        }
+    </style>
 </head>
 <body>
 
-<!--LOADER-->
-<div class="loading">
-    <div class="main">
-        <div class="dot">
-            <div class="dot2"></div>
-        </div>
+<!-- NAV -->
+<header class="nav" role="banner">
+    <div class="logo" aria-hidden="true">
+        <div class="mark">DA</div>
+        <div class="name">Diyorjon</div>
     </div>
-</div>
-<!--LOADER END-->
 
-<!--NAVBAR-->
-<nav id="nav" class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#"><img class="img-cl" src="images/logo/12121.png" alt=""></a>
+    <nav class="nav-links" role="navigation" aria-label="Main">
+        <a href="#hero">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
 
-    <!-- Toggler/collapsibe Button -->
-    <button onclick="navBack()" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<!-- HERO -->
+<main>
+    <section id="hero" aria-label="Introduction">
+        <div class="hero-inner">
+            <div class="hero-left">
+                <div class="hero-title">Hi, I'm Diyorjon Adashev</div>
+                <div class="hero-sub">
+                    PDP University student in Software Engineering. I build scalable web applications — frontend with React and backend with Java (Spring Boot) or Django. I focus on clean code, testability and real-world results.
+                </div>
 
-    <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#services">Services</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#portfolio">Portfolio</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#about">About</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<!--NAVBAR END-->
+                <div class="hero-cta">
+                    <a class="btn primary" href="https://educationdashboard.dev" target="_blank">View EduDash</a>
+                    <a class="btn ghost" href="#projects">Explore Projects</a>
+                </div>
+            </div>
 
-<!--HOME SECTION-->
-<section class="home">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="titles">
-                    <p>Welcome to my website</p>
-                    <h3>Adashev Diyor</h3>
-                    <div class="button">
-                        <a href="#portfolio">Hire me!</a>
-                    </div>
+            <div class="hero-right">
+                <div class="avatar" role="img" aria-label="Diyorjon photo">
+                    <!-- Replace with your photo file -->
+                    <img src="your-photo.jpg" alt="Diyorjon Adashev">
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!--HOME SECTION END-->
+    </section>
 
-<!--SERVICES SECTION-->
-<section id="services" class="services">
-    <div class="container">
-        <h3 class="text-center">Services</h3>
-        <p class="text-center"><i>Services</i></p>
-        <div class="row mt-5">
-
-            <div class="col-md-4" data-aos="fade-right" data-aos-duration="1000">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="imgWrapper">
-                            <img src="images/logo/laptop.png" alt="">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3>Programming</h3>
-                        <p>
-                            I started programming when I was 12 years old. Since then, I have been deeply passionate
-                            about software development. My journey began with front-end technologies, and now I have
-                            strong knowledge in both frontend and backend development.
-                            <br>
-                            🔜 <a href="https://www.youtube.com/watch?v=qcT_1tQre9o">Watch me 4-5 years earlier</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="zoom-in" data-aos-duration="1000">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="imgWrapper">
-                            <img src="images/logo/code-window.png" alt="">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3>Programming languages</h3>
-                        <p>
-                            I am currently studying IT at PDP School. I specialize in React for frontend, and Java
-                            (Spring Boot, Spring Security) for backend. I also use Python (Django) and PostgreSQL in
-                            full-stack projects.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-left" data-aos-duration="1000">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="imgWrapper">
-                            <img src="images/logo/chatbot-speech-bubble.png" alt="">
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h3>Services</h3>
-                        <p>
-                            I have created multiple web applications and currently lead a team in one of my projects. I
-                            actively solve problems on Leetcode to improve my algorithmic thinking. My goal is to work
-                            in top global tech companies and build innovative startups in the future.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-<!--SERVICES SECTION END-->
-
-<!--PORTFOLIO SECTION-->
-<section id="portfolio" class="portfolio">
-    <div class="container">
-        <h3 class="text-center">Portfolio</h3>
-        <p class="text-center"><i>Here are some of the projects which I've done with only HTML and CSS.</i></p>
-        <div class="boxes-elements">
-            <div class="card nnn-ele" data-aos="zoom-in" data-aos-duration="800">
-                <div class="face face1">
-                    <div class="content">
-                        <img src="images/porfolio/photo_2021-02-11_19-41-10.jpg" alt="">
-                    </div>
-                </div>
-                <div class="face face2">
-                    <div class="content">
-                        <i>This is MobilSet!</i>
-                        <a href="https://diyordev.netlify.app/" class="btn btn-success">See the project</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card nnn-ele" data-aos="zoom-out" data-aos-duration="800">
-                <div class="face face1">
-                    <div class="content">
-                        <img src="images/porfolio/photo_2021-02-11_19-42-00.jpg" alt="">
-                    </div>
-                </div>
-                <div class="face face2">
-                    <div class="content">
-                        <i>This is Glint!</i>
-                        <a href="https://diyorswebsite.netlify.app/" class="btn btn-success">See the project</a>
-                    </div>
-                </div>
+    <!-- PROJECTS -->
+    <section id="projects" aria-label="Projects">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+            <div>
+                <div class="section-title">Selected Projects</div>
+                <div class="section-sub">Live demos and repositories — frontend demos are available for most projects.</div>
             </div>
         </div>
-    </div>
-</section>
-<!--PORTFOLIO SECTION END-->
 
-<!--ABOUT SECTION-->
-<section id="about" class="about">
-    <div class="container">
-        <h3 class="text-center">About</h3>
-        <p class="text-center"><i>Men haqimdagi ma'lumotlar!</i></p>
-        <div class="row">
-
-            <div class="col-md-4" data-aos="fade-right" data-aos-duration="950">
-                <img class="w-100" src="images/about/my-ph.png" alt="my picture">
-            </div>
-            <div class="col-md-4">
-                <div class="info">
-                    <h4>Adashev Diyor</h4>
-                    <p>
-                        <i>
-                            I'm a passionate Full Stack Web Developer who started coding at the age of 12. For me,
-                            programming isn’t just a skill — it’s a way of thinking, creating, and solving real-world
-                            problems. This is the story of my journey in tech.
-                        </i>
-                    </p>
-                    <ul class="main">
-                        <li>
-              <span class="firstSpan">
-                <i class="fas fa-user"></i>
-                Name:
-              </span>
-                            <span class="secondSpan">
-                Adashev Diyor
-              </span>
-                        </li>
-                        <li>
-              <span class="firstSpan">
-                <i class="fas fa-calendar-alt"></i>
-                Birthday:
-              </span>
-                            <span class="secondSpan">
-                09.11.2007
-              </span>
-                        </li>
-                        <li>
-              <span class="firstSpan">
-                <i class="fas fa-map-marker-alt"></i>
-                Address:
-              </span>
-                            <span class="secondSpan">
-                Samarkand, Uzbekistan
-              </span>
-                        </li>
-                    </ul>
+        <div class="projects-grid" style="margin-top:14px">
+            <!-- EduDash (Demo only) -->
+            <article class="project" aria-labelledby="p1-title">
+                <div class="imgwrap">
+                    <img src="edudash.png" alt="EduDash screenshot">
                 </div>
-            </div>
+                <h4 id="p1-title">EduDash</h4>
+                <p>Multi-language education dashboard (React + Redux). Admin and user interfaces for course management.</p>
+                <div class="tags"><span class="tag">React</span><span class="tag">Redux</span><span class="tag">Postgres</span></div>
+                <div class="actions">
+                    <a class="action-btn" href="https://educationdashboard.dev" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+                </div>
+            </article>
 
+            <!-- Diyor Stroy -->
+            <article class="project" aria-labelledby="p2-title">
+                <div class="imgwrap">
+                    <img src="diyorstroy.png" alt="Diyor Stroy screenshot">
+                </div>
+                <h4 id="p2-title">Diyor Stroy</h4>
+                <p>Construction materials store — product catalog and marketing pages.</p>
+                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
+                <div class="actions">
+                    <a class="action-btn" href="https://diyorstroy.uz" target="_blank"><i class="fa-solid fa-globe"></i> Website</a>
+                    <a class="action-btn" href="https://github.com/adawev/DiyorStroyWeb" target="_blank"><i class="fa-brands fa-github"></i> Code</a>
+                </div>
+            </article>
+
+            <!-- NoutStore -->
+            <article class="project" aria-labelledby="p3-title">
+                <div class="imgwrap">
+                    <img src="noutstore.png" alt="NoutStore screenshot">
+                </div>
+                <h4 id="p3-title">NoutStore</h4>
+                <p>Laptop e-commerce frontend deployed; backend available in repository.</p>
+                <div class="tags"><span class="tag">React</span><span class="tag">Netlify</span><span class="tag">E-commerce</span></div>
+                <div class="actions">
+                    <a class="action-btn" href="https://noutstore.netlify.app" target="_blank"><i class="fa-solid fa-globe"></i> Demo</a>
+                    <a class="action-btn" href="https://github.com/adawev/NoutStoreFront" target="_blank"><i class="fa-brands fa-github"></i> Code</a>
+                </div>
+            </article>
         </div>
-    </div>
-</section>
-<!--ABOUT SECTION END-->
+    </section>
 
-<!--FOOTER-->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="copyright">
-                    <p>
-                        © Website made by Adashev Diyor
-                        <script>document.write(new Date().getFullYear());</script>
-                    </p>
+    <!-- SKILLS -->
+    <section id="skills" aria-label="Skills">
+        <div class="section-title">Skills & Tools</div>
+        <div class="section-sub">Technologies I use regularly — click to highlight.</div>
+
+        <div class="skills-grid" style="margin-top:12px">
+            <div class="skill" data-name="Java">
+                <div class="icon"><i class="fa-brands fa-java"></i></div>
+                <div>
+                    <strong>Java</strong>
+                    <small>Spring ecosystem</small>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="social-networks">
-                    <a href="https://www.instagram.com/adaweev/" class="networks">
-                        <div class="imgWrapper">
-                        </div>
-                    </a>
-                    <a href="https://t.me/adawev" class="networks">
-                        <div class="imgWrapper">
-                        </div>
-                    </a>
-                    <a href="https://github.com/adawev" class="networks">
-                        <div class="imgWrapper">
-                        </div>
-                    </a>
-                    <a href="https://www.facebook.com/adawev" class="networks">
-                        <div class="imgWrapper">
-                        </div>
-                    </a>
-                    <a href="https://www.linkedin.com/in/adawev/" class="networks">
-                        <div class="imgWrapper">
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCd0OpyGAyFafaEY75FfrAqQ/videos" class="networks">
-                        <div class="imgWrapper">
-                        </div>
-                    </a>
+
+            <div class="skill" data-name="Spring Boot">
+                <div class="icon"><i class="fa-solid fa-leaf"></i></div>
+                <div>
+                    <strong>Spring Boot</strong>
+                    <small>REST, Security</small>
                 </div>
             </div>
-            <div class="col-md-4">
-                <p class="smallInfo"><i>This is the portfolio website of Diyor Adashev</i></p>
+
+            <div class="skill" data-name="React">
+                <div class="icon"><i class="fa-brands fa-react"></i></div>
+                <div>
+                    <strong>React</strong>
+                    <small>Hooks, Redux</small>
+                </div>
+            </div>
+
+            <div class="skill" data-name="Django">
+                <div class="icon"><i class="fa-brands fa-python"></i></div>
+                <div>
+                    <strong>Django</strong>
+                    <small>REST APIs</small>
+                </div>
+            </div>
+
+            <div class="skill" data-name="Postgres">
+                <div class="icon"><i class="fa-solid fa-database"></i></div>
+                <div>
+                    <strong>PostgreSQL</strong>
+                    <small>SQL, Schemas</small>
+                </div>
+            </div>
+
+            <div class="skill" data-name="DevOps">
+                <div class="icon"><i class="fa-solid fa-server"></i></div>
+                <div>
+                    <strong>Docker / CI</strong>
+                    <small>Deploy & containers</small>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-label="Contact">
+        <div style="display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+            <div>
+                <div class="section-title">Contact</div>
+                <div class="section-sub">Feel free to reach out — I usually reply within a day.</div>
+            </div>
+            <div style="text-align:right;color:var(--muted)"><strong>Phone:</strong> +998 XX XXX XX XX</div>
+        </div>
+
+        <div style="margin-top:12px" class="contact-row">
+            <div class="social" aria-hidden="true">
+                <a href="https://instagram.com/diyor.stroy" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://t.me/diyor.stroy" target="_blank" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://github.com/adawev" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div>© <span id="year"></span> Diyorjon Adashev — All rights reserved</div>
 </footer>
-<!--FOOTER END-->
 
-
-<!--IMPORTATNT JS FILES-->
-<script src="./Bootstrap/js/jQuery.min.js"></script>
-<script src="./Bootstrap/js/popper.js"></script>
-<script src="./Bootstrap/js/bootstrap.min.js"></script>
-<script src="./aos-master/dist/aos.js"></script>
 <script>
-    AOS.init({
-        easing: 'ease-in-out-sine'
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // scroll reveal for simple elements (projects & skills)
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.style.opacity = 1;
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.transition = 'all .6s var(--ease)';
+                obs.unobserve(e.target);
+            }
+        });
+    }, {threshold: .12});
+
+    document.querySelectorAll('.project, .skill').forEach(el => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(18px)';
+        observer.observe(el);
     });
+
+    // small interactive skill animation on click
+    document.querySelectorAll('.skill').forEach(s => {
+        s.addEventListener('mouseenter', () => {
+            s.classList.add('anim');
+        });
+        s.addEventListener('animationend', () => s.classList.remove('anim'));
+        s.addEventListener('mouseleave', () => s.classList.remove('anim'));
+        // optional: click to show name in console (placeholder for future interaction)
+        s.addEventListener('click', () => console.log('Skill:', s.dataset.name || ''));
+    });
+
+    // keyboard accessibility: nav links focus outline
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.addEventListener('focus', () => a.style.outline = '2px solid rgba(255,255,255,0.06)');
+        a.addEventListener('blur', () => a.style.outline = 'none');
+    });
+
+    // reduce motion preference
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+        document.querySelectorAll('.project, .skill, .avatar').forEach(el => {
+            el.style.transition = 'none';
+            el.style.animation = 'none';
+        });
+    }
 </script>
-<script src="./js/app.js"></script>
-<!--IMPORTANT JS FILES END-->
 </body>
 </html>
