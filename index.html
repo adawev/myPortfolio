@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Diyorjon Adashev — Portfolio</title>
 
-    <!-- Font Awesome for icons -->
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- New Font (Montserrat + Inter mix) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root{
@@ -14,11 +16,11 @@
             --panel:#111216;
             --muted:#bfc7cc;
             --text:#eef2f3;
-            --accent:#7fe3d9; /* subtle accent, not Tiffany */
+            --accent:#7fe3d9;
             --card:#17181b;
             --radius:12px;
             --ease:cubic-bezier(.2,.9,.3,1);
-            font-family: Inter, "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            font-family: "Montserrat", Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
         }
 
         *{box-sizing:border-box}
@@ -28,9 +30,15 @@
             background:var(--bg);
             color:var(--text);
             -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing:grayscale;
             line-height:1.5;
             scroll-behavior:smooth;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width:1200px;
+            margin:0 auto;
+            padding:0 24px;
         }
 
         /* NAVBAR */
@@ -42,37 +50,36 @@
             align-items:center;
             justify-content:space-between;
             padding:0 28px;
-            background:rgba(8,8,9,0.6);
-            backdrop-filter:blur(8px);
+            background:rgba(8,8,9,0.7);
+            backdrop-filter:blur(10px);
             z-index:120;
-            border-bottom:1px solid rgba(255,255,255,0.02);
+            border-bottom:1px solid rgba(255,255,255,0.06);
         }
         .logo {display:flex; gap:12px; align-items:center}
         .logo .mark{
             width:44px; height:44px; border-radius:10px;
             background:linear-gradient(180deg,#151515,#222);
-            display:grid; place-items:center; font-weight:700; color:var(--text);
+            display:grid; place-items:center;
+            font-weight:800; color:var(--text);
             box-shadow:0 6px 14px rgba(0,0,0,0.6);
         }
-        .logo .name {font-weight:700; letter-spacing:0.2px; color:var(--text)}
+        .logo .name {font-weight:800; letter-spacing:0.3px; font-size:18px}
 
         .nav-links{display:flex; gap:18px; align-items:center}
         .nav-links a{
             color:var(--muted); text-decoration:none; font-weight:600; padding:8px 10px;
-            transition: color .22s var(--ease), transform .18s var(--ease);
+            transition: color .22s var(--ease);
             border-radius:8px;
         }
-        /* On hover only color change (no underline) */
-        .nav-links a:hover{ color:var(--text); transform: translateY(-2px) }
+        /* faqat rang o'zgaradi, siljimasin */
+        .nav-links a:hover{ color:var(--text); }
 
-        /* HERO - full screen */
+        /* HERO */
         #hero {
             height:100vh;
             display:flex;
             align-items:center;
             justify-content:center;
-            gap:48px;
-            padding:0 28px;
             position:relative;
         }
         .hero-inner{
@@ -83,146 +90,117 @@
             align-items:center;
             justify-content:space-between;
         }
-        .hero-left{
-            flex:1; min-width:320px;
-            transform:translateY(0);
-            opacity:1;
-        }
-        .hero-right{
-            width:320px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
-        }
+        .hero-left{ flex:1; min-width:320px; }
+        .hero-right{ width:320px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
 
-        /* avatar circle */
         .avatar{
             width:280px; height:280px; border-radius:50%;
-            overflow:hidden; border:6px solid rgba(255,255,255,0.06);
+            overflow:hidden; border:6px solid rgba(255,255,255,0.08);
             background:linear-gradient(180deg,#0f0f10,#151516);
-            display:grid; place-items:center; transition: transform .45s var(--ease), box-shadow .45s var(--ease);
-            box-shadow:0 20px 50px rgba(0,0,0,0.6);
+            box-shadow:0 24px 60px rgba(0,0,0,0.7);
         }
         .avatar img{ width:100%; height:100%; object-fit:cover; display:block }
 
-        .avatar:hover{ transform:scale(1.03); box-shadow:0 30px 70px rgba(0,0,0,0.75) }
-
         .hero-title{
-            font-size: clamp(28px, 4.2vw, 44px);
-            font-weight:800; color:var(--text); margin-bottom:12px;
-            letter-spacing:-0.02em;
-            line-height:1.02;
-            transform:translateY(6px);
+            font-size: clamp(30px, 4.4vw, 48px);
+            font-weight:900;
+            margin-bottom:14px;
+            line-height:1.1;
         }
         .hero-sub{
-            color:var(--muted); font-size:18px; max-width:680px;
-            margin-bottom:18px;
+            color:var(--muted); font-size:18px; max-width:640px;
+            margin-bottom:22px;
         }
-        .hero-cta{ display:flex; gap:12px; align-items:center }
+        .hero-cta{ display:flex; gap:14px; align-items:center }
         .btn{
-            padding:10px 16px; border-radius:10px; font-weight:700; cursor:pointer; text-decoration:none;
-            display:inline-flex; gap:8px; align-items:center; border:1px solid rgba(255,255,255,0.04);
-            transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .18s var(--ease);
-            background:transparent; color:var(--text);
+            padding:11px 18px; border-radius:10px; font-weight:700;
+            cursor:pointer; text-decoration:none;
+            display:inline-flex; gap:8px; align-items:center;
+            border:1px solid rgba(255,255,255,0.06);
+            transition: background .22s var(--ease), color .22s var(--ease);
         }
-        .btn.primary{ background:var(--text); color:var(--bg); box-shadow:0 8px 30px rgba(0,0,0,0.6) }
-        .btn.ghost{ border:1px solid rgba(255,255,255,0.06); color:var(--muted) }
-        .btn:hover{ transform:translateY(-4px) }
+        .btn.primary{ background:var(--text); color:var(--bg); }
+        .btn.ghost{ background:transparent; color:var(--muted); }
+        /* faqat rang o'zgaradi */
+        .btn:hover{ background:var(--text); color:var(--bg); }
 
-        /* compact sections */
-        section { padding:56px 28px; }
-
-        .section-title{ font-size:20px; font-weight:800; color:var(--text); margin-bottom:14px }
-        .section-sub{ color:var(--muted); margin-bottom:18px; font-weight:500 }
+        /* SECTIONS */
+        section { padding:72px 0; }
+        .section-title{ font-size:22px; font-weight:800; margin-bottom:14px }
+        .section-sub{ color:var(--muted); margin-bottom:20px; font-weight:500 }
 
         /* PROJECTS */
         .projects-grid{
-            display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap:18px;
+            display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap:20px;
         }
         .project{
-            background:var(--card); border-radius:12px; padding:14px; overflow:hidden;
-            display:flex; flex-direction:column; gap:10px; transition: transform .28s var(--ease), box-shadow .28s var(--ease);
-            border:1px solid rgba(255,255,255,0.02);
+            background:var(--card);
+            border-radius:12px;
+            padding:16px;
+            display:flex; flex-direction:column; gap:12px;
+            border:1px solid rgba(255,255,255,0.06);
+            transition:transform .25s var(--ease), box-shadow .25s var(--ease);
         }
-        .project:hover{ transform:translateY(-8px); box-shadow:0 22px 50px rgba(0,0,0,0.6) }
-        .project .imgwrap{ height:150px; border-radius:8px; overflow:hidden; background:#0f0f10; display:grid; place-items:center }
-        .project img{ width:100%; height:100%; object-fit:cover; display:block }
-        .project h4{ margin:6px 0; font-size:18px; color:var(--text); font-weight:700 }
-        .project p{ color:var(--muted); font-size:13px; margin-bottom:6px }
-        .project .tags{ display:flex; gap:8px; flex-wrap:wrap }
-        .tag{ font-size:12px; color:var(--muted); background:rgba(255,255,255,0.02); padding:6px 8px; border-radius:999px }
+        .project:hover{ transform:translateY(-4px); box-shadow:0 18px 40px rgba(0,0,0,0.65) }
+        .project h4{ font-size:18px; font-weight:700; margin:8px 0 }
+        .project p{ font-size:14px; color:var(--muted) }
 
-        .project .actions{ margin-top:auto; display:flex; gap:10px; flex-wrap:wrap }
+        .tag{ font-size:12px; color:var(--muted); background:rgba(255,255,255,0.05); padding:6px 10px; border-radius:999px }
+
         .action-btn{
-            display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius:999px; font-weight:700;
-            background:rgba(255,255,255,0.06); color:var(--text); text-decoration:none; border:1px solid rgba(255,255,255,0.02);
-            transition: background .18s var(--ease), transform .12s var(--ease);
+            display:inline-flex; gap:8px; align-items:center;
+            padding:8px 12px; border-radius:999px;
+            background:rgba(255,255,255,0.08);
+            color:var(--text); text-decoration:none;
+            transition: background .18s var(--ease);
         }
-        .action-btn i{ font-size:14px; color:var(--muted) }
-        .action-btn:hover{ background:var(--text); color:var(--bg); transform:translateY(-3px) }
-        .action-btn:hover i{ color:var(--bg) }
+        .action-btn:hover{ background:var(--text); color:var(--bg) }
+        .action-btn i{ font-size:14px }
 
         /* SKILLS */
         .skills-grid{
-            display:grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap:12px;
+            display:grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap:16px;
         }
         .skill{
-            background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-            border-radius:10px; padding:14px; display:flex; gap:12px; align-items:center;
-            transition: transform .28s var(--ease), box-shadow .28s var(--ease);
-            border:1px solid rgba(255,255,255,0.02);
-        }
-        .skill .icon{
-            width:44px; height:44px; border-radius:10px; display:grid; place-items:center; font-size:20px;
-            color:var(--text);
             background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-            box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+            border-radius:12px; padding:16px; display:flex; gap:14px; align-items:center;
+            border:1px solid rgba(255,255,255,0.05);
+            transition:transform .25s var(--ease), box-shadow .25s var(--ease);
         }
-        .skill strong{ font-size:14px; color:var(--text) }
-        .skill small{ display:block; color:var(--muted); font-size:12px }
-
-        /* skill pulse animation */
-        .skill:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.6) }
-        .skill.anim { animation: pop .9s ease; }
-        @keyframes pop { 0%{ transform:scale(.98) } 60%{ transform:scale(1.02) } 100%{ transform:scale(1) } }
+        .skill:hover{ transform:translateY(-4px); box-shadow:0 16px 32px rgba(0,0,0,0.65) }
+        .skill .icon{
+            width:48px; height:48px; border-radius:12px; display:grid; place-items:center; font-size:22px;
+            background:rgba(255,255,255,0.06);
+        }
+        .skill strong{ font-size:15px }
 
         /* CONTACT */
-        .contact-row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center }
-        .social{
-            display:inline-flex; gap:10px; align-items:center;
-        }
         .social a{
-            width:46px; height:46px; border-radius:10px; display:grid; place-items:center; text-decoration:none;
-            background:rgba(255,255,255,0.03); color:var(--text); transition: transform .18s var(--ease), background .18s var(--ease);
-            border:1px solid rgba(255,255,255,0.02);
+            width:48px; height:48px; border-radius:12px; display:grid; place-items:center;
+            background:rgba(255,255,255,0.06); color:var(--text);
+            transition: background .2s var(--ease);
         }
-        .social a:hover{ transform:translateY(-6px); background:rgba(255,255,255,0.12); color:var(--text) }
+        .social a:hover{ background:var(--text); color:var(--bg) }
 
-        /* Footer */
-        footer{ padding:28px 20px; text-align:center; color:var(--muted); font-size:13px; border-top:1px solid rgba(255,255,255,0.02) }
+        footer{ padding:28px; text-align:center; color:var(--muted); font-size:13px; border-top:1px solid rgba(255,255,255,0.06) }
 
-        /* Responsive tweaks */
+        /* Responsive */
         @media (max-width:920px){
-            .hero-inner{ flex-direction:column-reverse; align-items:center; gap:24px }
+            .hero-inner{ flex-direction:column-reverse; text-align:center }
             .hero-right{ width:220px }
             .avatar{ width:220px; height:220px }
-            nav { padding:0 16px }
-        }
-        @media (max-width:520px){
-            .nav { height:56px; padding:0 12px }
-            .logo .mark{ width:38px; height:38px }
-            .hero-title{ font-size:26px }
         }
     </style>
 </head>
 <body>
 
-<!-- NAV -->
-<header class="nav" role="banner">
-    <div class="logo" aria-hidden="true">
+<header class="nav">
+    <div class="logo">
         <div class="mark">DA</div>
         <div class="name">Diyorjon</div>
     </div>
-
-    <nav class="nav-links" role="navigation" aria-label="Main">
+    <nav class="nav-links">
         <a href="#hero">Home</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
@@ -230,157 +208,100 @@
     </nav>
 </header>
 
-<!-- HERO -->
 <main>
-    <section id="hero" aria-label="Introduction">
-        <div class="hero-inner">
+    <!-- HERO -->
+    <section id="hero">
+        <div class="container hero-inner">
             <div class="hero-left">
                 <div class="hero-title">Hi, I'm Diyorjon Adashev</div>
                 <div class="hero-sub">
-                    PDP University student in Software Engineering. I build scalable web applications — frontend with React and backend with Java (Spring Boot) or Django. I focus on clean code, testability and real-world results.
+                    PDP University student in Software Engineering. I build scalable web applications — frontend with React and backend with Java (Spring Boot) or Django.
                 </div>
 
                 <div class="hero-cta">
-                    <a class="btn primary" href="https://educationdashboard.dev" target="_blank">View EduDash</a>
+                    <a class="btn primary" href="https://github.com/adawev" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
                     <a class="btn ghost" href="#projects">Explore Projects</a>
                 </div>
             </div>
-
             <div class="hero-right">
-                <div class="avatar" role="img" aria-label="Diyorjon photo">
-                    <!-- Replace with your photo file -->
-                    <img src="your-photo.jpg" alt="Diyorjon Adashev">
-                </div>
+                <div class="avatar"><img src="your-photo.jpg" alt="Diyorjon Adashev"></div>
             </div>
         </div>
     </section>
 
     <!-- PROJECTS -->
-    <section id="projects" aria-label="Projects">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
-            <div>
-                <div class="section-title">Selected Projects</div>
-                <div class="section-sub">Live demos and repositories — frontend demos are available for most projects.</div>
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">Selected Projects</div>
+            <div class="section-sub">Live demos and repositories — frontend demos are available for most projects.</div>
+
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <article class="project">
+                    <div class="imgwrap"><img src="edudash.png" alt="EduDash screenshot"></div>
+                    <h4>EduDash</h4>
+                    <p>Multi-language education dashboard (React + Redux).</p>
+                    <div class="tags">
+                        <span class="tag">React</span><span class="tag">Redux</span><span class="tag">Postgres</span>
+                    </div>
+                    <div class="actions">
+                        <a class="action-btn" href="https://educationdashboard.dev" target="_blank"><i class="fa-solid fa-globe"></i> Demo</a>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project">
+                    <div class="imgwrap"><img src="portfolio.png" alt="Portfolio screenshot"></div>
+                    <h4>Personal Portfolio</h4>
+                    <p>Responsive personal portfolio website (HTML, CSS, JS).</p>
+                    <div class="tags">
+                        <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+                    </div>
+                    <div class="actions">
+                        <a class="action-btn" href="https://adashev.uz" target="_blank"><i class="fa-solid fa-globe"></i> Demo</a>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project">
+                    <div class="imgwrap"><img src="store.png" alt="Diyor Stroy screenshot"></div>
+                    <h4>Diyor Stroy</h4>
+                    <p>Construction store website with product catalog.</p>
+                    <div class="tags">
+                        <span class="tag">Bootstrap</span><span class="tag">JavaScript</span><span class="tag">Backend</span>
+                    </div>
+                    <div class="actions">
+                        <a class="action-btn" href="https://diyorstroy.uz" target="_blank"><i class="fa-solid fa-globe"></i> Demo</a>
+                    </div>
+                </article>
             </div>
-        </div>
-
-        <div class="projects-grid" style="margin-top:14px">
-            <!-- EduDash (Demo only) -->
-            <article class="project" aria-labelledby="p1-title">
-                <div class="imgwrap">
-                    <img src="edudash.png" alt="EduDash screenshot">
-                </div>
-                <h4 id="p1-title">EduDash</h4>
-                <p>Multi-language education dashboard (React + Redux). Admin and user interfaces for course management.</p>
-                <div class="tags"><span class="tag">React</span><span class="tag">Redux</span><span class="tag">Postgres</span></div>
-                <div class="actions">
-                    <a class="action-btn" href="https://educationdashboard.dev" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
-                </div>
-            </article>
-
-            <!-- Diyor Stroy -->
-            <article class="project" aria-labelledby="p2-title">
-                <div class="imgwrap">
-                    <img src="diyorstroy.png" alt="Diyor Stroy screenshot">
-                </div>
-                <h4 id="p2-title">Diyor Stroy</h4>
-                <p>Construction materials store — product catalog and marketing pages.</p>
-                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>
-                <div class="actions">
-                    <a class="action-btn" href="https://diyorstroy.uz" target="_blank"><i class="fa-solid fa-globe"></i> Website</a>
-                    <a class="action-btn" href="https://github.com/adawev/DiyorStroyWeb" target="_blank"><i class="fa-brands fa-github"></i> Code</a>
-                </div>
-            </article>
-
-            <!-- NoutStore -->
-            <article class="project" aria-labelledby="p3-title">
-                <div class="imgwrap">
-                    <img src="noutstore.png" alt="NoutStore screenshot">
-                </div>
-                <h4 id="p3-title">NoutStore</h4>
-                <p>Laptop e-commerce frontend deployed; backend available in repository.</p>
-                <div class="tags"><span class="tag">React</span><span class="tag">Netlify</span><span class="tag">E-commerce</span></div>
-                <div class="actions">
-                    <a class="action-btn" href="https://noutstore.netlify.app" target="_blank"><i class="fa-solid fa-globe"></i> Demo</a>
-                    <a class="action-btn" href="https://github.com/adawev/NoutStoreFront" target="_blank"><i class="fa-brands fa-github"></i> Code</a>
-                </div>
-            </article>
         </div>
     </section>
 
+
     <!-- SKILLS -->
-    <section id="skills" aria-label="Skills">
-        <div class="section-title">Skills & Tools</div>
-        <div class="section-sub">Technologies I use regularly — click to highlight.</div>
-
-        <div class="skills-grid" style="margin-top:12px">
-            <div class="skill" data-name="Java">
-                <div class="icon"><i class="fa-brands fa-java"></i></div>
-                <div>
-                    <strong>Java</strong>
-                    <small>Spring ecosystem</small>
-                </div>
-            </div>
-
-            <div class="skill" data-name="Spring Boot">
-                <div class="icon"><i class="fa-solid fa-leaf"></i></div>
-                <div>
-                    <strong>Spring Boot</strong>
-                    <small>REST, Security</small>
-                </div>
-            </div>
-
-            <div class="skill" data-name="React">
-                <div class="icon"><i class="fa-brands fa-react"></i></div>
-                <div>
-                    <strong>React</strong>
-                    <small>Hooks, Redux</small>
-                </div>
-            </div>
-
-            <div class="skill" data-name="Django">
-                <div class="icon"><i class="fa-brands fa-python"></i></div>
-                <div>
-                    <strong>Django</strong>
-                    <small>REST APIs</small>
-                </div>
-            </div>
-
-            <div class="skill" data-name="Postgres">
-                <div class="icon"><i class="fa-solid fa-database"></i></div>
-                <div>
-                    <strong>PostgreSQL</strong>
-                    <small>SQL, Schemas</small>
-                </div>
-            </div>
-
-            <div class="skill" data-name="DevOps">
-                <div class="icon"><i class="fa-solid fa-server"></i></div>
-                <div>
-                    <strong>Docker / CI</strong>
-                    <small>Deploy & containers</small>
-                </div>
+    <section id="skills">
+        <div class="container">
+            <div class="section-title">Skills & Tools</div>
+            <div class="section-sub">Technologies I use regularly.</div>
+            <div class="skills-grid">
+                <div class="skill"><div class="icon"><i class="fa-brands fa-java"></i></div><div><strong>Java</strong><small>Spring Boot</small></div></div>
+                <div class="skill"><div class="icon"><i class="fa-brands fa-react"></i></div><div><strong>React</strong><small>Redux</small></div></div>
+                <div class="skill"><div class="icon"><i class="fa-brands fa-python"></i></div><div><strong>Django</strong><small>REST APIs</small></div></div>
             </div>
         </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" aria-label="Contact">
-        <div style="display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-            <div>
-                <div class="section-title">Contact</div>
-                <div class="section-sub">Feel free to reach out — I usually reply within a day.</div>
-            </div>
-            <div style="text-align:right;color:var(--muted)"><strong>Phone:</strong> +998 XX XXX XX XX</div>
-        </div>
-
-        <div style="margin-top:12px" class="contact-row">
-            <div class="social" aria-hidden="true">
-                <a href="https://instagram.com/diyor.stroy" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="#" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://t.me/diyor.stroy" target="_blank" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
-                <a href="https://github.com/adawev" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">Contact</div>
+            <div class="contact-row">
+                <div class="social">
+                    <a href="https://instagram.com/diyor.stroy" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://t.me/diyor.stroy" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="https://github.com/adawev" target="_blank"><i class="fa-brands fa-github"></i></a>
+                </div>
             </div>
         </div>
     </section>
@@ -391,52 +312,7 @@
 </footer>
 
 <script>
-    // set year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // scroll reveal for simple elements (projects & skills)
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.style.opacity = 1;
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.transition = 'all .6s var(--ease)';
-                obs.unobserve(e.target);
-            }
-        });
-    }, {threshold: .12});
-
-    document.querySelectorAll('.project, .skill').forEach(el => {
-        el.style.opacity = 0;
-        el.style.transform = 'translateY(18px)';
-        observer.observe(el);
-    });
-
-    // small interactive skill animation on click
-    document.querySelectorAll('.skill').forEach(s => {
-        s.addEventListener('mouseenter', () => {
-            s.classList.add('anim');
-        });
-        s.addEventListener('animationend', () => s.classList.remove('anim'));
-        s.addEventListener('mouseleave', () => s.classList.remove('anim'));
-        // optional: click to show name in console (placeholder for future interaction)
-        s.addEventListener('click', () => console.log('Skill:', s.dataset.name || ''));
-    });
-
-    // keyboard accessibility: nav links focus outline
-    document.querySelectorAll('.nav-links a').forEach(a => {
-        a.addEventListener('focus', () => a.style.outline = '2px solid rgba(255,255,255,0.06)');
-        a.addEventListener('blur', () => a.style.outline = 'none');
-    });
-
-    // reduce motion preference
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-        document.querySelectorAll('.project, .skill, .avatar').forEach(el => {
-            el.style.transition = 'none';
-            el.style.animation = 'none';
-        });
-    }
 </script>
 </body>
 </html>
